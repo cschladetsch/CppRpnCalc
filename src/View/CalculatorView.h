@@ -4,9 +4,14 @@
 #include <string>
 #include <vector>
 #include <functional>
+#include <memory>
 #include <imgui.h>
 
 class CalculatorModel;
+
+namespace RPN {
+    class GraphView;
+}
 
 class CalculatorView {
 public:
@@ -21,7 +26,7 @@ public:
     };
     
     CalculatorView();
-    ~CalculatorView() = default;
+    ~CalculatorView();
     
     void render(const CalculatorModel& model);
     
@@ -32,6 +37,8 @@ public:
     void setSwapCallback(std::function<void()> callback);
     void setClearCallback(std::function<void()> callback);
     void setBackspaceCallback(std::function<void()> callback);
+    
+    void toggleGraphView();
 
 private:
     struct Button {
@@ -61,6 +68,9 @@ private:
     ImVec4 numberButtonColor = ImVec4(0.2f, 0.2f, 0.3f, 1.0f);
     ImVec4 operationButtonColor = ImVec4(0.3f, 0.2f, 0.2f, 1.0f);
     ImVec4 controlButtonColor = ImVec4(0.2f, 0.3f, 0.2f, 1.0f);
+    
+    std::unique_ptr<RPN::GraphView> graphView;
+    CalculatorModel* modelPtr = nullptr;
 };
 
 #endif

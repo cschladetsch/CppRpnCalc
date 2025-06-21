@@ -23,18 +23,31 @@ set(IMGUI_SOURCES
     ${IMGUI_DIR}/backends/imgui_impl_opengl3.cpp
 )
 
+# ImPlot
+set(IMPLOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/implot)
+set(IMPLOT_SOURCES
+    ${IMPLOT_DIR}/implot.cpp
+    ${IMPLOT_DIR}/implot_items.cpp
+)
+
 # Project sources
 set(PROJECT_SOURCES
     main.cpp
     src/Model/CalculatorModel.cpp
+    src/Model/GraphData.cpp
+    src/Model/GraphFunction.cpp
     src/View/CalculatorView.cpp
+    src/View/GraphView.cpp
     src/Controller/CalculatorController.cpp
 )
 
 # Project headers
 set(PROJECT_HEADERS
     src/Model/CalculatorModel.h
+    src/Model/GraphData.h
+    src/Model/GraphFunction.h
     src/View/CalculatorView.h
+    src/View/GraphView.h
     src/Controller/CalculatorController.h
 )
 
@@ -43,6 +56,7 @@ add_executable(rpn_calculator
     ${PROJECT_SOURCES}
     ${PROJECT_HEADERS}
     ${IMGUI_SOURCES}
+    ${IMPLOT_SOURCES}
 )
 
 # Include directories
@@ -50,6 +64,7 @@ target_include_directories(rpn_calculator PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${IMGUI_DIR}
     ${IMGUI_DIR}/backends
+    ${IMPLOT_DIR}
 )
 
 # Link libraries

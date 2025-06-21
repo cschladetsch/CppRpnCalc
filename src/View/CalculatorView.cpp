@@ -1,12 +1,20 @@
 #include "CalculatorView.h"
 #include "../Model/CalculatorModel.h"
+#include "GraphView.h"
 #include <sstream>
 #include <iomanip>
 
 CalculatorView::CalculatorView() {
 }
 
+CalculatorView::~CalculatorView() {
+}
+
 void CalculatorView::render(const CalculatorModel& model) {
+    if (!modelPtr) {
+        modelPtr = const_cast<CalculatorModel*>(&model);
+        graphView = std::make_unique<RPN::GraphView>(modelPtr);
+    }
     ImGui::SetNextWindowPos(ImVec2(0, 0));
     ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
     ImGui::Begin("Calculator", nullptr, 
@@ -25,6 +33,10 @@ void CalculatorView::render(const CalculatorModel& model) {
     renderButtons();
     
     ImGui::End();
+    
+    if (graphView) {
+        graphView->Render();
+    }
 }
 
 void CalculatorView::renderStack(const std::vector<double>& stack) {
@@ -153,6 +165,14 @@ void CalculatorView::renderButtons() {
     renderButton("log", buttonWidth * 0.5f - spacing/2, [this]() { if (operationCallback) operationCallback("log"); });
     ImGui::PopStyleColor();
     
+    ImGui::Separator();
+    
+    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.2f, 0.2f, 0.4f, 1.0f));
+    if (ImGui::Button("Graph View", ImVec2(-1, buttonHeight))) {
+        toggleGraphView();
+    }
+    ImGui::PopStyleColor();
+    
     ImGui::PopStyleVar();
 }
 
@@ -190,4 +210,10 @@ void CalculatorView::setClearCallback(std::function<void()> callback) {
 
 void CalculatorView::setBackspaceCallback(std::function<void()> callback) {
     backspaceCallback = callback;
+}
+
+void CalculatorView::toggleGraphView() {
+    if (graphView) {
+        graphView->ToggleVisible();
+    }
 }
