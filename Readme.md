@@ -97,15 +97,14 @@ Functions can:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/CppRpnCalc.git
+git clone https://github.com/cschladetsch/CppRpnCalc.git
 cd CppRpnCalc
 
 # Create build directory
-mkdir build && cd build
+mkdir -p build && cd build
 
 # Configure and build
-cmake ..
-make
+cmake .. && make
 
 # Run the calculator
 ./rpn_calculator
