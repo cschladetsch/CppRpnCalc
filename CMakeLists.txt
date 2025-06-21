@@ -80,9 +80,14 @@ if(APPLE)
     target_link_libraries(rpn_calculator "-framework Cocoa" "-framework IOKit")
 endif()
 
-# Set output directory
+# Set output directories for all configurations
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/bin)
+
+# Set output directory for main executable
 set_target_properties(rpn_calculator PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
+    RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin
 )
 
 # Tests
@@ -125,6 +130,6 @@ if(BUILD_TESTS)
     
     # Set test output directory
     set_target_properties(rpn_calculator_tests PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
+        RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin
     )
 endif()

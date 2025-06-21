@@ -2,6 +2,10 @@
 
 A modern RPN (Reverse Polish Notation) calculator built with C++ and ImGui, featuring a graphical interface, user-defined functions, and comprehensive mathematical operations.
 
+## Demo
+
+![Demo](resources/Demo1.png)
+
 ## Features
 
 ### Core Functionality
