@@ -36,6 +36,7 @@ set(PROJECT_SOURCES
     src/Model/CalculatorModel.cpp
     src/Model/GraphData.cpp
     src/Model/GraphFunction.cpp
+    src/Model/InfixToRPN.cpp
     src/View/CalculatorView.cpp
     src/View/GraphView.cpp
     src/Controller/CalculatorController.cpp
@@ -46,6 +47,7 @@ set(PROJECT_HEADERS
     src/Model/CalculatorModel.h
     src/Model/GraphData.h
     src/Model/GraphFunction.h
+    src/Model/InfixToRPN.h
     src/View/CalculatorView.h
     src/View/GraphView.h
     src/Controller/CalculatorController.h

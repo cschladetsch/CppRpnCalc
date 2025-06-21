@@ -1,5 +1,6 @@
 #include "GraphFunction.h"
 #include "CalculatorModel.h"
+#include "InfixToRPN.h"
 #include <sstream>
 #include <cmath>
 #include <algorithm>
@@ -59,10 +60,9 @@ double GraphFunction::EvaluateAtPoint(double x) {
     
     std::string preparedExpr = PrepareExpression(expression, x);
     
-    std::istringstream iss(preparedExpr);
-    std::string token;
+    std::vector<std::string> rpnTokens = InfixToRPN::convert(preparedExpr);
     
-    while (iss >> token) {
+    for (const auto& token : rpnTokens) {
         try {
             double value = std::stod(token);
             calculator->pushValue(value);
